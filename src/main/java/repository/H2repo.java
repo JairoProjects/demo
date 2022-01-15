@@ -18,9 +18,8 @@ public class H2repo {
 	@Value("${app.jdbcurl}")
 	private String jdbcurl;
 
-	private String sql_de_insertar = "";
-
 	public void insertar(Student student) {
+		final String sql_de_insertar = "INSERT INTO student (edad) VALUES (" + student.getEdad() + ")";
 		Connection connection = cm.open(jdbcurl);
 		System.out.println("guardando en H2");
 		cm.executeSql(connection, sql_de_insertar);
