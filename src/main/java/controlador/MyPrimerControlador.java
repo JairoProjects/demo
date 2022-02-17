@@ -10,16 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import modelo.Student;
+import service.DabaseService;
 import service.MyDatabase;
 
 @Controller
 public class MyPrimerControlador {
 	@Autowired
-	private MyDatabase service;
+	private DabaseService service;
 
 	@GetMapping("/hello")
 	public String hola(Student student) {
 		service.insert(student);
+		service.nollamar();
 		System.out.println(student);
 		return "fin";
 	}
@@ -28,7 +30,9 @@ public class MyPrimerControlador {
 	public ModelAndView bienvenida() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("index");
-		modelAndView.addObject("student", new Student());
+		Student student = new Student();
+		student.setEdad("40");
+		modelAndView.addObject("student", student);
 		return modelAndView;
 	}
 
